@@ -27,8 +27,24 @@ public class AthleticGameWinnersTest
 	@Test
 	public void testWinnerFabio()
 	{
-		game.addArrival("Elio", Instant.now());
-		game.addArrival("Fabio", Instant.now());
+		game.addArrival("Elio", Instant.now().minusSeconds(33));
+		game.addArrival("Fabio", Instant.now().minusSeconds(35));
+		assertEquals("Fabio", game.getWinner());
+	}
+	@Test(timeout = 1000)
+	public void testSleep()
+	{
+		try
+		{
+			Thread.sleep(1010);
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		game.addArrival("Elio", Instant.now().minusSeconds(33));
+		game.addArrival("Fabio", Instant.now().minusSeconds(35));
 		assertEquals("Fabio", game.getWinner());
 	}
 }
